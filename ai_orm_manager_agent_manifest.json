@@ -1,0 +1,82 @@
+{
+  "name": "AI ORM Manager PPTX Agent",
+  "version": "0.3.13-custom-gpt-final-current",
+  "status": "slides_01_12_ready_with_slide11_enlarged_chart_area_slide05_title_shape_fix_slide12_scenario_kpis",
+  "entrypoints": {
+    "ai_orm_manager_cli": "scripts/report_pptx/generate_report_pptx.mjs",
+    "python_pipeline": "ai_presentation_orm_v0_3_13/run_pipeline.py"
+  },
+  "engine_flag": "--engine python-v0.3.13",
+  "ready_slides": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  "template_rules": {
+    "mode": "template_first_in_place_edit",
+    "slide_count_required": 12,
+    "do_not_copy_template_conclusions": true,
+    "do_not_expose_local_filenames": true,
+    "project_brand_bold_everywhere": true,
+    "title_font": "Arial 28",
+    "body_font": "Arial 11",
+    "table_font": "Arial 9 vertical middle",
+    "title_position": "Use the same title slot on every slide.",
+    "source_note_position": "Use the same bottom source-note slot on every slide.",
+    "left_alignment": "Align slide content to the left edge of the slide title unless a reference slot explicitly requires centered chart/table content."
+  },
+  "chart_rules": {
+    "font": "Arial",
+    "default_label_value_size": 10,
+    "compact_label_value_size": 10,
+    "number_grouping": "Use spaces between thousands on chart values.",
+    "other_bucket_order": "Always place Other/Другие/Остальные/Прочие buckets at the end of chart series.",
+    "native_charts_preferred": "Prefer editable PowerPoint charts and native labels. If bitmap fallback is required, render at final slide size with the same font constants.",
+    "pie_donut_labels": "Labels must stay outside the chart circle or ring. Prefer editable PowerPoint label blocks with color square, label, count, and percent. Use Arial 10; if labels collide, reflow layout instead of shrinking below 10.",
+    "stacked_bar_labels": "Small stacked segments must not receive unreadable inside labels. Move small non-zero labels outside with a vertical gap and suppress zero labels.",
+    "legends": "Keep legends separated from axis labels with enough bottom margin.",
+    "slide11_alignment": "Use a common vertical chart slot, common baseline, and common legend line for all three slide 11 mini charts."
+  },
+  "data_rules": {
+    "campaign": "Campaign equals all project ORM month publication rows for reviews and comments, including comments in open discussions, top/search, SERM, embedded discussions, and native-photo comments.",
+    "organic": "Organic equals remaining monthly brand mentions after campaign messages are removed.",
+    "media_plan_fact": "When a project ORM month sheet is available, media-plan fact is overridden by the ORM publication count for that month.",
+    "conclusion_sources": "Do not duplicate source/method footnotes in analytical conclusions; use the standard slide source note."
+  },
+  "slide06": {
+    "title": "ТОНАЛЬНОСТЬ СООБЩЕНИЙ О БРЕНДАХ КАТЕГОРИИ",
+    "left_chart": "absolute_stacked_tonality_by_brand",
+    "right_chart": "daily_tonality_dynamics_for_project_brand",
+    "source": "Brand Analytics",
+    "qa_total_match_required": true,
+    "daily_line_color_order": ["Позитив: green", "Нейтрал: gray", "Негатив: red"]
+  },
+  "slide04": {
+    "title": "ИНФОПОЛЕ ОБСУЖДЕНИЙ ПРОБЛЕМЫ",
+    "chart": "semantic_problem_contexts_from_thematic_mentions",
+    "label_rules": "2-3_word_context_labels_capitalized_no_raw_one_word_fallbacks",
+    "noise_guard": "exclude_brand_competitor_objects_and_low_signal_non_medical_topics",
+    "duplicate_guard": "raw_terms_already_used_in_semantic_group_are_not_added_as_separate_bars"
+  },
+  "slide07": {
+    "title": "Где обсуждают бренды и тематику?",
+    "left_chart": "platform_type_donut",
+    "middle_chart": "top_sources_horizontal_bars",
+    "right_table": "top_communities_sources",
+    "source": "Brand Analytics",
+    "qa_total_match_required": true,
+    "object_column_guard": "never_use_object_role_as_project_object_column_validate_brand_presence"
+  },
+  "slide08": {
+    "views_metric_label": "Просмотры",
+    "views_chart_months": "last_two_valid_monthly_orm_sheets"
+  },
+  "slide09_10": {
+    "screenshot_policy": "real_source_page_screenshots_first_manual_source_links_if_capture_unavailable",
+    "local_backends": ["python_playwright", "headless_chrome_or_edge_cli"],
+    "custom_gpt_backend": "chatgpt_screenshot_handoff",
+    "handoff_manifest": "slide09_10_screenshots/chatgpt_screenshot_requests.json",
+    "force_handoff_env": "AI_ORM_SCREENSHOT_BACKEND=chatgpt",
+    "wrapper_flag": "--screenshot-backend chatgpt",
+    "manual_link_fallback": {
+      "qa_status": "ready_for_manual_screenshot_links",
+      "behavior": "insert_best_source_links_into_slide_09_10_slots_when_screenshots_are_unavailable"
+    }
+  }
+}

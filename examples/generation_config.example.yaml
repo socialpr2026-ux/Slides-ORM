@@ -1,0 +1,50 @@
+# Generic example config for AI ORM Manager.
+# Copy this file into a project workspace and replace paths/labels with project data.
+
+project:
+  brand: "Project brand"
+  competitors:
+    - "Competitor 1"
+    - "Competitor 2"
+  period_label: "May 2026"
+  report_title: "ORM report"
+  brand_aliases:
+    "Project brand alternate spelling": "Project brand"
+
+paths:
+  template: "reference/template.pptx"
+  output_dir: "outputs/project_report_build"
+  output_pptx: "outputs/project_report.pptx"
+
+inputs:
+  files:
+    - "inputs/project_orm_table.xlsx"
+    - "inputs/analytics_report.xlsx"
+    - "inputs/comparative_report.xlsx"
+  exclude_patterns:
+    - "~$*"
+
+processing:
+  engine: "python-v0.3.13"
+  campaign_month_sheet: "May"
+  ratings_sheet: "Ratings"
+  ratings_current_period: "May 2026"
+  screenshot_backend: "chatgpt"
+  source_exclusions: []
+
+rules:
+  campaign_fact_priority:
+    - "project_orm_month_rows"
+    - "publication_sheet_fallback"
+    - "media_plan_fallback"
+  orm_campaign_includes:
+    - "reviews"
+    - "comments"
+    - "open_discussion_comments"
+    - "top_search_comments"
+    - "serm_comments"
+    - "embedded_discussion_comments"
+    - "native_photo_comments"
+  target_sov_formula: "organic_target_mentions + orm_campaign_total"
+  do_not_cap_orm_by_analytics: true
+  source_exclusions_are_run_level_only: true
